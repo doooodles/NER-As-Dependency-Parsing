@@ -31,4 +31,15 @@
 
 每个数点都可以实现对应的转化，接下来需要将数据封装为torch中提供的Dataset类，并padding构造minibatch以方便输入到模型中。（这部分代码理解还不够深入）
 
-已经批量化的数据集，可直接作为可迭代对象，迭代取出输入到模型中。
+已经批量化的数据集，可直接作为可迭代对象，迭代取出输入到模型中。将整个数据集3：1分割为训练集和验证集，只有训练集用于更新参数。
+
+（发现label中会出现超过14的数值，因为个别的label中存在对同一个pos起始和终止位置的切片重复打标签的问题，先忽略这两个label。）
+
+打印完整矩阵的方法
+
+```python
+torch.set_printoptions(profile="full")
+print(x) # prints the whole tensor
+torch.set_printoptions(profile="default")
+```
+
