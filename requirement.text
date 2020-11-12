@@ -1,2 +1,6 @@
 torch>=1.6.0
-torc
+torchtext==0.7.0
+pandas
+numpy
+tqdm
+transformers
