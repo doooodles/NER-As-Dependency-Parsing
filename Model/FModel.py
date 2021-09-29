@@ -32,4 +32,14 @@ class FModel(nn.Module, ABC):
         start = self.feedStart(x)
         end = self.feedEnd(x)
         # print("FEEDSTART:", start)
-        
+        # print("FEEDEND:", end)
+        score = self.biaffine(start, end)
+        # print("BIAFFINE:", score)
+        return score
+
+#
+# if __name__ == "__Main__":
+#     x = torch.FloatTensor(3, 4, 10)
+#     model = SModel(10, 10, 5,2)
+#     result = model(x)
+#     print(result.shape)
