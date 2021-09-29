@@ -21,4 +21,15 @@ class FModel(nn.Module, ABC):
         self.bilstm = nn.LSTM(d_in, 200, num_layers=3, batch_first=True, dropout=0.4,
                               bidirectional=bi)
         self.feedStart = feedforwardLayer(400, 150, dropout=0.2)
-        self.feedEnd = 
+        self.feedEnd = feedforwardLayer(400, 150, dropout=0.2)
+        self.biaffine = biaffineLayer(400, 400, d_class, dropout=dropout)
+
+    def forward(self, x, atten):
+        x = self.model(x, atten)[0]
+        # print(x.shape)
+        x, _ = self.bilstm(x)
+        # print("BILSTM:", x)
+        start = self.feedStart(x)
+        end = self.feedEnd(x)
+        # print("FEEDSTART:", start)
+        
