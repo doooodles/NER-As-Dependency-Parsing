@@ -62,3 +62,73 @@ def evalTrainer():
         #score, pred = out.max(-1)
         #print(pred.sum())
         # loss = -(c * torch.log(F.softmax(out, dim=-1))).sum()
+        epochLoss += loss.item()
+        cycle += 1
+        f1_score += batch_computeF1(label, out, mask)
+        #print(f1_score)
+    return epochLoss/cycle, f1_score/cycle
+
+
+def trainTrainer(epoch):
+    evalLoss = 9999
+    for i in trange(epoch):
+        print()
+        start_time = time.time()
+        model.train()
+        epochLoss = 0.0
+        cycle = 0
+        for passage, mask, label in trainLoader:
+            #print("-------------Training--------")
+            passage = passage.long()
+            passage = passage.to(device)
+            mask = mask.to(device)
+            label = label.to(device)
+
+            #print(passage.shape)
+            if(len(passage.shape)<2):
+                passage = passage.unsqueeze(0)
+                mask = mask.unsqueeze(0)
+
+            with torch.no_grad():
+                emb = pretrained_model(passage, attention_mask=mask)[0]
+            #emb = emb.to(device)
+
+            #print("-------------embing--------")
+            out = model(emb)
+            #print("-------------modeling--------")
+            optimizer.zero_grad()
+            tmp_out, tmp_label = get_useful_ones(out, label, mask)
+            # loss = lossFunc(out.reshape(out.shape[0] * out.shape[1] * out.shape[2], -1),
+            #                 label.reshape(label.shape[0] * label.shape[1] * label.shape[2]))
+            loss = lossFunc(tmp_out, tmp_label)
+            # loss = -(c * torch.log(F.softmax(out, dim=-1))).sum()
+            loss.backward()
+            optimizer.step()
+            #print("-------------lossing--------")
+            #print(loss.item())
+            # score, pred = out.max(-1)
+            # print(pred, pred.sum())
+            epochLoss += loss.item()
+            cycle += 1
+
+        epochLoss = epochLoss / cycle
+        evalLoss_new, f1_score = evalTrainer()
+        if evalLoss_new < evalLoss:
+            evalLoss = evalLoss_new
+            # torch.save(
+            #     {
+            #         'epoch': i,
+            #         'model_state_dict': model.state_dict(),
+            #         'optimizer_state_dict': optimizer.state_dict(),
+            #         'loss': evalLoss_new,
+            #     }, os.path.join(ckp_path, '100e_12b_1024h_0001lr_4l_5dp_2max.pt') # parser版本可根据参数情况来设置ckp文件名
+            # )
+        #evalLoss = min(evalLoss_new, evalLoss)
+
+        print("====Epoch: {} epoch_loss: {} dev_loss: {} F1 score: {}".format(i+1, epochLoss, evalLoss, f1_score))
+        print("    Time used: {}".format(timeSince(start_time)))
+
+
+if __name__ == "__main__":
+    trainTrainer(epoch)
+    #evalTrainer()
