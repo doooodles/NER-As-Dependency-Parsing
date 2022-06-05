@@ -1,1 +1,16 @@
-﻿ID,Category,Pos_b,Po
+﻿ID,Category,Pos_b,Pos_e,Privacy
+485,movie,0,5,《鬼屋魔影》
+485,name,30,34,乌维·鲍尔
+485,position,28,29,导演
+485,address,44,54,光耀东方广场a座写字楼
+485,government,97,101,国土资源局
+485,movie,134,136,《影》
+485,organization,164,165,曼联
+485,organization,192,193,曼联
+485,movie,214,220,《夺宝奇兵4》
+485,book,256,261,《大众软件》
+485,position,284,285,医生
+485,game,290,293,DotA
+485,company,333,334,招行
+485,game,377,382,《上古卷轴》
+485,company,342,347
