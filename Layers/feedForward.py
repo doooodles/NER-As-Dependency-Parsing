@@ -18,4 +18,8 @@ class feedforwardLayer(nn.Module, ABC):
         # self.para = nn.Parameter(torch.tensor([0.0]))
 
     def forward(self, x):
-       
+        residual = x
+        x = self.layer_norm(x)
+        x = self.w_2(self.dropout(F.relu(self.w_1(x))))
+        x = residual + self.dropout2(x)
+        return x
