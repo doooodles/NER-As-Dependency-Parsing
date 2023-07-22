@@ -15,4 +15,20 @@ CUDA_VISIBLE_DEVICES='1' CUDA_LAUNCH_BLOCKING=1  python -u train.py > ../log/tes
 
 ```bash
 # 启动nni调参，更改gpu设置时需要对config文件做修改
-CUDA_VISIBLE_DEVICES='5' nnictl create --config NewNER/config.yml --
+CUDA_VISIBLE_DEVICES='5' nnictl create --config NewNER/config.yml --port 8890
+
+# 如果发生问题及时停止
+nnictl stop
+```
+
+第一轮次较为粗糙的调参的搜索空间设置：
+
+```json
+{
+    "epoch": {"_type":"choice", "_value": [64]},
+    "batch_size": {"_type":"choice", "_value": [8,12]},
+    "d_in":{"_type":"choice","_value":[768]},
+    "d_hid":{"_type":"choice","_value":[384,512,768,1024]},
+    "lr":{"_type":"choice","_value":[0.0001,0.005,0.001]},
+    "dropout":{"_type":"choice","_value":[0.3,0.4,0.2,0.5]},
+    "n_laye
