@@ -31,4 +31,18 @@ nnictl stop
     "d_hid":{"_type":"choice","_value":[384,512,768,1024]},
     "lr":{"_type":"choice","_value":[0.0001,0.005,0.001]},
     "dropout":{"_type":"choice","_value":[0.3,0.4,0.2,0.5]},
-    "n_laye
+    "n_layers":{"_type":"choice","_value":[2,4,6]},
+    "redo":{"_type":"choice","_value":[0]}
+}
+```
+
+目前感觉可以改进的地方：epoch可以设置32，模型需要在较小的lr和dropout下才会有较好的表现，lstm的层数会较为显著地影响训练时长。
+
+周末采用更为精细的搜索空间在进行一次搜索。考虑先解决f1的问题，如果模型只学习到了将所有的类别分类为0（non-entity），那就难搞了。。。
+
+还是先尝试一次训练，看看随着epoch上升，f1分数是否有提升，并打印一些经过非零过滤的预测类别矩阵的打分矩阵，看看是否预测出了一些非0实体。
+
+两个较为合适的训练条件：
+
+```
+/nni-experiments/toUYkbCF/trials/JESm
