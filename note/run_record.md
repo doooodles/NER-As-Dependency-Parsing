@@ -45,4 +45,15 @@ nnictl stop
 两个较为合适的训练条件：
 
 ```
-/nni-experiments/toUYkbCF/trials/JESm
+/nni-experiments/toUYkbCF/trials/JESmp
+```
+
+![image-20201113231514673](C:\Users\86435\AppData\Roaming\Typora\typora-user-images\image-20201113231514673.png)
+
+```
+/nni-experiments/ggDTj89G/trials/tgx5U
+```
+
+![image-20201113232215046](C:\Users\86435\AppData\Roaming\Typora\typora-user-images\image-20201113232215046.png)
+
+采用了上面第一组的参数设置，设置了100轮次的训练，但70+轮次之后整体F1分数依然是0，且每一个预测类别矩阵中，类别为0的概率依然是最大值，即经过max操作后，得到的所有预测类别
