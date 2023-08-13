@@ -39,4 +39,11 @@ class dataPreLoader:
 
     def match(self, data: str, label: pd) -> bool:
         if data[int(label["Pos_b"]):int(label["Pos_e"]) + 1] != str(label["Privacy"]):
-            pr
+            print(data[int(label["Pos_b"]):int(label["Pos_e"]) + 1], str(label["Privacy"]))
+            print(len(data[int(label["Pos_b"]):int(label["Pos_e"]) + 1]), len(str(label["Privacy"])))
+            return False
+        return True
+        # assert data[int(label["Pos_b"]):int(label["Pos_e"]) + 1] == str(label["Privacy"]), "data matches"
+
+    # 判断是否开始位置结束位置实体 为标注的单词段落
+    
