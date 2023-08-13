@@ -20,4 +20,15 @@ class dataPreLoader:
             sentence = pd.read_csv(path + "data/" + str(i) + ".txt", names=['Text'])['Text']
             sentence = ''.join(list(sentence))
             temp['Text'] = sentence[:min(len(sentence), 500)]
-            temp = temp[temp["Pos_b"] < 500][temp["
+            temp = temp[temp["Pos_b"] < 500][temp["Pos_e"] < 500]
+            labelList.append(temp)
+            # print(temp)
+        return labelList
+
+    # def tokenizer(sequence: str) -> list:
+    #     return [tok for tok in sequence]
+
+    # def loadData(self,path: str = "./train/data/", count: int = 2515) -> list:
+    #     dataList = []
+    #     for i in trange(count):
+    #         temp = pd.read_csv(path + str(i) + ".txt
