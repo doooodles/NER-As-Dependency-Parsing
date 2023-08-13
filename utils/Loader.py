@@ -31,4 +31,12 @@ class dataPreLoader:
     # def loadData(self,path: str = "./train/data/", count: int = 2515) -> list:
     #     dataList = []
     #     for i in trange(count):
-    #         temp = pd.read_csv(path + str(i) + ".txt
+    #         temp = pd.read_csv(path + str(i) + ".txt", names=['Text'])
+    #         dataList.append(temp.loc[0]['Text'])
+    #         # print(temp.loc[0]['text'])
+    #     # dataList = list(map(lambda text: tokenizer(text), dataList))
+    #     return dataList
+
+    def match(self, data: str, label: pd) -> bool:
+        if data[int(label["Pos_b"]):int(label["Pos_e"]) + 1] != str(label["Privacy"]):
+            pr
