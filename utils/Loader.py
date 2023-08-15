@@ -46,4 +46,8 @@ class dataPreLoader:
         # assert data[int(label["Pos_b"]):int(label["Pos_e"]) + 1] == str(label["Privacy"]), "data matches"
 
     # 判断是否开始位置结束位置实体 为标注的单词段落
-    
+    def matches(self, label: pd) -> pd:
+        # print(label)
+        if label["Text"][int(label["Pos_b"]):int(label["Pos_e"]) + 1] != str(label["Privacy"]):
+            print(label["Text"][int(label["Pos_b"]):int(label["Pos_e"]) + 1], str(label["Privacy"]))
+            print(len(label["Text"][int(label["Pos_b"]):int(label["Pos_e
