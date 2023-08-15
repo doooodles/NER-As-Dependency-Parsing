@@ -50,4 +50,14 @@ class dataPreLoader:
         # print(label)
         if label["Text"][int(label["Pos_b"]):int(label["Pos_e"]) + 1] != str(label["Privacy"]):
             print(label["Text"][int(label["Pos_b"]):int(label["Pos_e"]) + 1], str(label["Privacy"]))
-            print(len(label["Text"][int(label["Pos_b"]):int(label["Pos_e
+            print(len(label["Text"][int(label["Pos_b"]):int(label["Pos_e"]) + 1]), len(str(label["Privacy"])))
+            return None
+        return label
+
+    def funcMatch(self, label: pd) -> pd:
+        label = label.apply(lambda x: self.matches(x), axis=1).dropna(axis=0, how='any')
+        return label
+
+    def load(self, path: str = "./train/", count: int = 2515) -> list:
+        data = self.loadLabel(path, count)
+        data = list(map(lambda atom: self.func
