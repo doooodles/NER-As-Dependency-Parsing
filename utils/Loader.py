@@ -79,4 +79,13 @@ class dataPreLoader:
 
         # category = list(map(lambda line: process(line), data))
         # category = list(sorted(set(list(chain(*category)))))
-        category = ['QQ', 'address', 'book', 'company', 'email'
+        category = ['QQ', 'address', 'book', 'company', 'email',
+                    'game', 'government', 'mobile', 'movie',
+                    'name', 'organization', 'position', 'scene', 'vx']
+
+        data = list(map(lambda line: filterCategory(line), data))
+
+        index = [i for i in range(len(category))]
+        cate2index = dict(zip(category, index))
+        index2cate = dict(zip(index, category))
+        oneHot = np.eye(len(ind
