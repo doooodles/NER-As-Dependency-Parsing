@@ -70,4 +70,13 @@ class dataPreLoader:
             return []
 
         def filterCategory(line: pd):
-            if len(lin
+            if len(line) >= 1:
+                line = line[line['Category'].isin(category)]
+                return line
+            return None
+
+        data = self.load(path, count)
+
+        # category = list(map(lambda line: process(line), data))
+        # category = list(sorted(set(list(chain(*category)))))
+        category = ['QQ', 'address', 'book', 'company', 'email'
