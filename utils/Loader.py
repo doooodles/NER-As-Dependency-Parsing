@@ -60,4 +60,14 @@ class dataPreLoader:
 
     def load(self, path: str = "./train/", count: int = 2515) -> list:
         data = self.loadLabel(path, count)
-        data = list(map(lambda atom: self.func
+        data = list(map(lambda atom: self.funcMatch(atom), data))
+        return data
+
+    def dataFilter(self, path: str = "./train/", count: int = 2515) -> Tuple[list, Dict[int, Any], Dict[Any, int]]:
+        def process(line):
+            if len(line) >= 1:
+                return line['Category'].to_list()
+            return []
+
+        def filterCategory(line: pd):
+            if len(lin
