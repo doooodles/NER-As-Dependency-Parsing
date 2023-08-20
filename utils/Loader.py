@@ -88,4 +88,19 @@ class dataPreLoader:
         index = [i for i in range(len(category))]
         cate2index = dict(zip(category, index))
         index2cate = dict(zip(index, category))
-        oneHot = np.eye(len(ind
+        oneHot = np.eye(len(index)).tolist()
+        print(category)
+
+        dataC = []
+        for d in data:
+            if d is not None:
+                d = d.dropna(axis=0, how='any')
+                d = d.reset_index()
+                dataC.append(d)
+        data = dataC
+
+        for d in data:
+            for i in range(len(d)):
+                assert d.loc[i]['Category'] in category
+
+        def cate2oneHot
