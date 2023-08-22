@@ -103,4 +103,13 @@ class dataPreLoader:
             for i in range(len(d)):
                 assert d.loc[i]['Category'] in category
 
-        def cate2oneHot
+        def cate2oneHotProcessing(line):
+            # print(line)
+            if line['Category'] in category:
+                line['Category'] = cate2index[line["Category"]] + 1
+            # return self.oneHot(cate2index[line["Category"]])
+            return line
+
+        def cate2oneHot(line):
+            line = line.apply(lambda x: cate2oneHotProcessing(x), axis=1)
+            return line
