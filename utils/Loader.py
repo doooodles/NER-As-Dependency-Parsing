@@ -113,3 +113,7 @@ class dataPreLoader:
         def cate2oneHot(line):
             line = line.apply(lambda x: cate2oneHotProcessing(x), axis=1)
             return line
+
+        data = list(map(lambda line: cate2oneHot(line), data))
+        print("total_data_length:", len(data))
+        return data, index2cate, cate2index
