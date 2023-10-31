@@ -10,4 +10,21 @@
 
 ## Environment
 * torch>=1.6.0
-*
+* torchtext==0.7.0
+* pandas
+* numpy
+* tqdm
+* transformers
+
+## Hyperparameter Optimization
+### Tool: NNI
+#### Tuner
+Tree-structured Parzen Estimator
+#### Assessor
+Curve Fitting Assessor
+
+## Members
+Note: Member information withheld to protect privacy
+- Doooodles
+
+Welcome to contribute to this project owned by user Doooodles. Suggestions and contributions are always welcome.
